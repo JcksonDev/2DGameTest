@@ -1,9 +1,11 @@
 package dev.jcksondev.gametest;
 
 import dev.jcksondev.gametest.display.Display;
+import dev.jcksondev.gfx.ImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Game implements Runnable{
     private Display display;
@@ -16,6 +18,8 @@ public class Game implements Runnable{
     private BufferStrategy bs;
     private Graphics g;
 
+    private BufferedImage testImage;
+
     public Game(String title, int width, int height) {
         this.title = title;
         this.width = width;
@@ -24,6 +28,7 @@ public class Game implements Runnable{
 
     private void init() {
         display = new Display(title, width, height);
+        testImage = ImageLoader.loadImage("/textures/testimage.png");
     }
 
     private void tick() {}
@@ -35,12 +40,12 @@ public class Game implements Runnable{
             return;
         }
         g = bs.getDrawGraphics();
+        g.clearRect(0,0, width, height); // Clear screen
         // Start drawing
 
-        g.fillRect(0, 0, width, height);
+        
 
         // End drawing
-
         bs.show();
         g.dispose();
     }
